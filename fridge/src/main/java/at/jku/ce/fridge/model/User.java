@@ -46,12 +46,12 @@ public class User {
 //    private ShoppingList shoppingList;
 
     @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name = "fridge_id")
+    @JoinColumn(name = "fridge_id", referencedColumnName = "fridge_id", insertable = false, updatable = false)
     @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "user"})
     private Fridge fridge;
 
     @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name = "shopping_list_id")
+    @JoinColumn(name = "shopping_list_id", referencedColumnName = "shopping_list_id", insertable = false, updatable = false)
     @JsonIgnoreProperties({"applications", "hibernateLazyInitializer", "user"})
     @JsonBackReference
     private ShoppingList shoppingList;
