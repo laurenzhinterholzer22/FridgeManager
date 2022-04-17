@@ -1,6 +1,5 @@
 package at.jku.ce.fridge.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -10,29 +9,29 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "fridge")
-public class Fridge {
+@Table(name = "shopping_list")
+public class ShoppingList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "fridge_id",columnDefinition = "serial")
+    @Column(name = "shopping_list_id", columnDefinition = "serial")
     private Integer id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "fridge", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "shoppingList", cascade = CascadeType.ALL)
     @Column(nullable = true)
-    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "fridge"})
+    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "shoppingList"})
     @JsonIgnore
     @JsonManagedReference
     private Set<User> user;
 
-    public Fridge () {
+    public ShoppingList() {
 
     }
 
-    public Fridge (Integer id, String name, Set<User> user) {
+    public ShoppingList(Integer id, String name, Set<User> user){
         this.id = id;
         this.name = name;
         this.user = user;

@@ -1,7 +1,10 @@
 package at.jku.ce.fridge.controller;
 
 import at.jku.ce.fridge.model.Fridge;
+import at.jku.ce.fridge.model.ShoppingList;
 import at.jku.ce.fridge.service.IFridgeService;
+import at.jku.ce.fridge.service.IShoppingListService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,9 +13,12 @@ import java.util.Optional;
 @RestController
 public class FridgeController {
 
+    @Autowired
     private final IFridgeService fridgeService;
 
-    FridgeController (IFridgeService fridgeService) {this.fridgeService = fridgeService;}
+    FridgeController (IFridgeService fridgeService) {
+        this.fridgeService = fridgeService;
+    }
 
     @GetMapping("/fridge")
     public List<Fridge> getAllFridges() {
@@ -25,7 +31,7 @@ public class FridgeController {
     }
 
     @DeleteMapping("/fridge/{id}")
-    void delteFridge(@PathVariable Integer id) {
+    void deleteFridge(@PathVariable Integer id) {
         if(fridgeService.findById(id).isPresent()) {
             fridgeService.deleteById(id);
         }
@@ -35,4 +41,7 @@ public class FridgeController {
     Fridge newFridge(@RequestBody Fridge fridge) {
         return fridgeService.save(fridge);
     }
+
+
+
 }

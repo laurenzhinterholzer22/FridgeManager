@@ -5,30 +5,29 @@ DROP TABLE IF EXISTS amount CASCADE;
 DROP TABLE IF EXISTS product CASCADE;
 
 CREATE TABLE fridge (
-id serial PRIMARY KEY,
+fridge_id serial PRIMARY KEY,
 name VARCHAR(255) NOT NULL);
 
 CREATE TABLE shopping_list (
-id serial PRIMARY KEY,
+shopping_list_id serial PRIMARY KEY,
 name VARCHAR(255) NOT NULL);
 
 CREATE TABLE user_ (
-id serial PRIMARY KEY,
+user_id serial PRIMARY KEY,
 name VARCHAR(255) NOT NULL,
 email VARCHAR(255) NOT NULL,
 password VARCHAR(255) NOT NULL,
 birthday DATE NOT NULL,
 gender VARCHAR(255) NOT NULL,
-fridge INTEGER NOT NULL,
-shopping_list INTEGER NOT NULL,
-FOREIGN KEY (fridge) REFERENCES fridge(id) ON DELETE CASCADE,
-FOREIGN KEY (shopping_list) REFERENCES shopping_list(id) ON DELETE CASCADE);
+fridge_id INTEGER NOT NULL,
+shopping_list_id INTEGER NOT NULL,
+FOREIGN KEY (fridge_id) REFERENCES fridge(fridge_id) ON DELETE CASCADE,
+FOREIGN KEY (shopping_list_id) REFERENCES shopping_list(shopping_list_id) ON DELETE CASCADE);
 
 CREATE TABLE amount (
 description VARCHAR(255) NOT NULL,
 amount NUMERIC NOT NULL,
 PRIMARY KEY (description, amount));
-
 
 CREATE TABLE product (
 ean VARCHAR(255) NOT NULL,
@@ -37,12 +36,12 @@ category VARCHAR(255) NOT NULL,
 expiryDate TIMESTAMP,
 amount_description VARCHAR(255) NOT NULL,
 amount_amount NUMERIC NOT NULL,
-fridge INTEGER NOT NULL,
-shopping_list INTEGER NOT NULL,
+fridge_id INTEGER NOT NULL,
+shopping_list_id INTEGER NOT NULL,
 FOREIGN KEY (amount_description,amount_amount) REFERENCES amount(description,amount),
-FOREIGN KEY (fridge) REFERENCES fridge(id) ON DELETE CASCADE,
-FOREIGN KEY (shopping_list) REFERENCES shopping_list(id) ON DELETE CASCADE,
-PRIMARY KEY(ean,expiryDate,fridge,shopping_list));
+FOREIGN KEY (fridge_id) REFERENCES fridge(fridge_id) ON DELETE CASCADE,
+FOREIGN KEY (shopping_list_id) REFERENCES shopping_list(shopping_list_id) ON DELETE CASCADE,
+PRIMARY KEY(ean,expiryDate,fridge_id,shopping_list_id));
 
 
 
