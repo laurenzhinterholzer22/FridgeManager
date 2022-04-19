@@ -1,10 +1,7 @@
 package at.jku.ce.fridge.model;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -18,7 +15,7 @@ import java.util.Optional;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "user_id", columnDefinition = "serial")
     private Long id;
 
@@ -39,15 +36,18 @@ public class User {
 
 
 
-    @ManyToOne (cascade = CascadeType.ALL)
+    @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "fridge_id", referencedColumnName = "fridge_id")
     @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "user"})
+    @JsonBackReference
+    @JsonIgnore
     private Fridge fridge;
 
-    @ManyToOne (cascade = CascadeType.ALL)
+    @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "shopping_list_id", referencedColumnName = "shopping_list_id")
     @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "user"})
     @JsonBackReference
+    @JsonIgnore
     private ShoppingList shoppingList;
 
     public User () {}

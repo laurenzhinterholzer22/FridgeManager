@@ -1,5 +1,7 @@
 package at.jku.ce.fridge.controller;
 
+import at.jku.ce.fridge.model.Fridge;
+import at.jku.ce.fridge.model.ShoppingList;
 import at.jku.ce.fridge.model.User;
 import at.jku.ce.fridge.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,8 @@ public class UserController {
 
     @PostMapping("/user")
     User newUser(@RequestBody User user) {
+        user.setFridge(new Fridge());
+        user.setShoppingList(new ShoppingList());
         return userService.save(user);
     }
 

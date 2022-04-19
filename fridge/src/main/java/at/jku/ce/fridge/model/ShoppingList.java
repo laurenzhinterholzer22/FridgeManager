@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -13,28 +12,34 @@ import java.util.Set;
 public class ShoppingList {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "shopping_list_id", columnDefinition = "serial")
     private Long id;
 
     @Column(name = "name")
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "shoppingList", cascade = CascadeType.ALL)
-    @Column(nullable = true)
-    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "shoppingList"})
-    @JsonIgnore
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "shoppingList", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private Set<User> user;
+    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "shoppping_list"})
+    @JsonIgnore
+    private User user;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "shoppingList", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "shopping_list"})
+    @JsonIgnore
+    private Set<Product> products;
 
     public ShoppingList() {
 
     }
 
-    public ShoppingList(Long id, String name, Set<User> user){
+    public ShoppingList(Long id, String name, User user, Set<Product> products) {
         this.id = id;
         this.name = name;
         this.user = user;
+        this.products = products;
     }
 
     public Long getId() {
@@ -53,11 +58,19 @@ public class ShoppingList {
         this.name = name;
     }
 
-    public Set<User> getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Set<User> user) {
+    public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 }
