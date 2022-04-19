@@ -27,12 +27,12 @@ public class ShoppingListController {
     }
 
     @GetMapping("/shoppingList/{id}")
-    public Optional<ShoppingList> getShoppingList(@PathVariable Integer id) {
+    public Optional<ShoppingList> getShoppingList(@PathVariable Long id) {
         return shoppingListService.findById(id);
     }
 
     @DeleteMapping("/shoppingList/{id}")
-    void deleteShoppingList(@PathVariable Integer id) {
+    void deleteShoppingList(@PathVariable Long id) {
         if(shoppingListService.findById(id).isPresent()) {
             shoppingListService.deleteById(id);
         }

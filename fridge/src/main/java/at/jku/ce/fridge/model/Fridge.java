@@ -16,7 +16,7 @@ public class Fridge {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "fridge_id",columnDefinition = "serial")
-    private Integer id;
+    private Long id;
 
     @Column(name="name")
     private String name;
@@ -32,17 +32,17 @@ public class Fridge {
 
     }
 
-    public Fridge (Integer id, String name, Set<User> user) {
+    public Fridge (Long id, String name, Set<User> user) {
         this.id = id;
         this.name = name;
         this.user = user;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

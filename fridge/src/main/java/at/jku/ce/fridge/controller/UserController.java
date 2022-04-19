@@ -24,12 +24,12 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public Optional<User> getUser(@PathVariable Integer id) {
+    public Optional<User> getUser(@PathVariable Long id) {
         return userService.findById(id);
     }
 
     @DeleteMapping("/user/{id}")
-    void deleteUser(@PathVariable Integer id) {
+    void deleteUser(@PathVariable Long id) {
         if(userService.findById(id).isPresent()) {
             userService.deleteById(id);
         }

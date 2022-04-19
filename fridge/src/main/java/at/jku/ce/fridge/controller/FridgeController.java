@@ -26,12 +26,12 @@ public class FridgeController {
     }
 
     @GetMapping("/fridge/{id}")
-    public Optional<Fridge> getFridge(@PathVariable Integer id) {
+    public Optional<Fridge> getFridge(@PathVariable Long id) {
         return fridgeService.findById(id);
     }
 
     @DeleteMapping("/fridge/{id}")
-    void deleteFridge(@PathVariable Integer id) {
+    void deleteFridge(@PathVariable Long id) {
         if(fridgeService.findById(id).isPresent()) {
             fridgeService.deleteById(id);
         }

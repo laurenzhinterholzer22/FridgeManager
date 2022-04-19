@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.criteria.CriteriaBuilder;
 
 @Repository
-public interface IShoppingListService extends JpaRepository<ShoppingList, Integer> {
+public interface IShoppingListService extends JpaRepository<ShoppingList, Long> {
 }

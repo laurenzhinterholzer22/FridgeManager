@@ -15,7 +15,7 @@ public class ShoppingList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "shopping_list_id", columnDefinition = "serial")
-    private Integer id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -31,17 +31,17 @@ public class ShoppingList {
 
     }
 
-    public ShoppingList(Integer id, String name, Set<User> user){
+    public ShoppingList(Long id, String name, Set<User> user){
         this.id = id;
         this.name = name;
         this.user = user;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

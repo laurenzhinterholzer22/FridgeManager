@@ -8,8 +8,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerator;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.swing.text.html.Option;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Optional;
 
 @Entity
 @Table(name = "user_")
@@ -18,7 +20,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", columnDefinition = "serial")
-    private Integer id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -35,30 +37,32 @@ public class User {
     @Column(name = "gender")
     private String gender;
 
-//    @ManyToOne (fetch = FetchType.LAZY)
-//    @JoinColumn(name = "fridge", referencedColumnName = "id")
-//    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
-//    private Fridge fridge;
-//
-//    @ManyToOne (fetch = FetchType.LAZY)
-//    @JoinColumn(name = "shopping_list", referencedColumnName = "id")
-//    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
-//    private ShoppingList shoppingList;
+
 
     @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name = "fridge_id", referencedColumnName = "fridge_id", insertable = false, updatable = false)
+    @JoinColumn(name = "fridge_id", referencedColumnName = "fridge_id")
     @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "user"})
     private Fridge fridge;
 
     @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name = "shopping_list_id", referencedColumnName = "shopping_list_id", insertable = false, updatable = false)
-    @JsonIgnoreProperties({"applications", "hibernateLazyInitializer", "user"})
+    @JoinColumn(name = "shopping_list_id", referencedColumnName = "shopping_list_id")
+    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "user"})
     @JsonBackReference
     private ShoppingList shoppingList;
 
     public User () {}
 
-    public User(Integer id, String name, String email, String password, Date birthday, String gender, Fridge fridge, ShoppingList shoppingList) {
+    public User(String name, String email, String password, Date birthday, String gender, Fridge fridge,ShoppingList shoppingList) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.birthday = birthday;
+        this.gender = gender;
+        this.fridge = fridge;
+        this.shoppingList = shoppingList;
+    }
+
+    public User(Long id, String name, String email, String password, Date birthday, String gender, Fridge fridge, ShoppingList shoppingList) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -69,11 +73,12 @@ public class User {
         this.shoppingList = shoppingList;
     }
 
-    public Integer getId() {
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -5,6 +5,12 @@ import at.jku.ce.fridge.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface IUserService extends JpaRepository<User, Integer> {
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+
+public interface IUserService extends JpaRepository<User,Long> {
+
+
 }
