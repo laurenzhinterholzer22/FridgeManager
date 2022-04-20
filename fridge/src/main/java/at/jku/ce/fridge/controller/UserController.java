@@ -3,6 +3,8 @@ package at.jku.ce.fridge.controller;
 import at.jku.ce.fridge.model.Fridge;
 import at.jku.ce.fridge.model.ShoppingList;
 import at.jku.ce.fridge.model.User;
+import at.jku.ce.fridge.service.IFridgeService;
+import at.jku.ce.fridge.service.IShoppingListService;
 import at.jku.ce.fridge.service.IUserService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,16 @@ public class UserController {
     @Autowired
     private final IUserService userService;
 
-    UserController (IUserService userService) {
+    @Autowired
+    private final IFridgeService fridgeService;
+
+    @Autowired
+    private final IShoppingListService shoppingListService;
+
+    UserController(IUserService userService, IFridgeService fridgeService, IShoppingListService shoppingListService) {
         this.userService = userService;
+        this.fridgeService = fridgeService;
+        this.shoppingListService = shoppingListService;
     }
 
     @GetMapping("/user")
@@ -33,6 +43,32 @@ public class UserController {
         return userService.findById(id);
     }
 
+    @GetMapping("/user/fridge/{id}")
+    public Long getUserFridge(@PathVariable Long id) {
+        if (userService.findById(id).isPresent()) {
+            if (fridgeService.existsById(userService.findById(id).get().getFridge().getId())) {
+                return fridgeService.findById(userService.findById(id).get().getFridge().getId()).get().getId();
+            }else {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            }
+        }else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/user/shoppingList/{id}")
+    public Long getUserShoppingList(@PathVariable Long id) {
+        if (userService.findById(id).isPresent()) {
+            if (shoppingListService.existsById(userService.findById(id).get().getShoppingList().getId())) {
+                return shoppingListService.findById(userService.findById(id).get().getShoppingList().getId()).get().getId();
+            }else {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            }
+        }else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @DeleteMapping("/user/{id}")
     void deleteUser(@PathVariable Long id) {
         if(userService.findById(id).isPresent()) {
@@ -42,10 +78,14 @@ public class UserController {
 
     @PostMapping(value = "/user", consumes = {"application/json"})
     User newUser(@RequestBody User user) {
-        user.setFridge(new Fridge());
-        user.setShoppingList(new ShoppingList());
-        user.setPassword(BCrypt.hashpw(user.getPassword(),BCrypt.gensalt()));
-        return userService.save(user);
+        try {
+            user.setFridge(new Fridge());
+            user.setShoppingList(new ShoppingList());
+            user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+            return userService.save(user);
+        } catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping(value = "/user/login", consumes = {"application/json"})

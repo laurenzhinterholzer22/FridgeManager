@@ -31,13 +31,8 @@ public class FridgeController {
         return fridgeService.findAll();
     }
 
-    @GetMapping("/fridge/{id}")
-    public Optional<Fridge> getFridge(@PathVariable Long id) {
 
-        return fridgeService.findById(id);
-    }
-
-    @GetMapping("/fridgeProducts/{id}")
+    @GetMapping("/fridge/{id}/products")
     public List <Product> getFridgeProducts(@PathVariable Long id) {
         List <Product> allP = productService.findAll();
         List <Product> returningP = new ArrayList<>();

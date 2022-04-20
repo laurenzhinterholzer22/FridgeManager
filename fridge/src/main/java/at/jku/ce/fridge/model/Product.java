@@ -21,10 +21,10 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(name = "ean")
+    @Column(name = "ean", nullable = false)
     private String ean;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "category")
@@ -36,7 +36,7 @@ public class Product {
     @Column(name = "amount_description")
     private String amount_description;
 
-    @Column(name = "amount")
+    @Column(name = "amount", nullable = false)
     private double amount;
 
 

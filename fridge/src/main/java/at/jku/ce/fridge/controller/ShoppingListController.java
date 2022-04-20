@@ -32,12 +32,8 @@ public class ShoppingListController {
         return shoppingListService.findAll();
     }
 
-    @GetMapping("/shoppingList/{id}")
-    public Optional<ShoppingList> getShoppingList(@PathVariable Long id) {
-        return shoppingListService.findById(id);
-    }
 
-    @GetMapping("/shoppingListProducts/{id}")
+    @GetMapping("/shoppingList/{id}/products")
     public List <Product> getFridgeProducts(@PathVariable Long id) {
         List <Product> allP = productService.findAll();
         List <Product> returningP = new ArrayList<>();

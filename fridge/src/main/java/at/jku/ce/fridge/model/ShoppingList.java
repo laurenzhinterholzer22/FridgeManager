@@ -17,8 +17,6 @@ public class ShoppingList {
     @Column(name = "shopping_list_id", columnDefinition = "serial")
     private Long id;
 
-    @Column(name = "name")
-    private String name;
 
 //    @OneToOne(fetch = FetchType.EAGER, mappedBy = "shoppingList", cascade = CascadeType.ALL)
 ////    @JsonManagedReference
@@ -43,9 +41,8 @@ public class ShoppingList {
 //        this.products = products;
 //    }
 
-    public ShoppingList(Long id, String name, Set<Product> products) {
+    public ShoppingList(Long id, Set<Product> products) {
         this.id = id;
-        this.name = name;
         this.products = products;
     }
 
@@ -57,13 +54,7 @@ public class ShoppingList {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
 //    public User getUser() {
 //        return user;
@@ -86,7 +77,7 @@ public class ShoppingList {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ShoppingList that = (ShoppingList) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(products, that.products);
+        return Objects.equals(id, that.id)  && Objects.equals(products, that.products);
     }
 
     @Override

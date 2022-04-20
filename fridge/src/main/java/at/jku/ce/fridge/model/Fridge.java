@@ -20,9 +20,6 @@ public class Fridge {
     @Column(name = "fridge_id",columnDefinition = "serial")
     private Long id;
 
-    @Column(name="name")
-    private String name;
-
 
 
 //    @OneToMany(fetch = FetchType.EAGER, mappedBy = "fridge", cascade = CascadeType.ALL)
@@ -44,9 +41,8 @@ public class Fridge {
 //        this.products = products;
 //    }
 
-    public Fridge(Long id, String name, Set<Product> products) {
+    public Fridge(Long id, Set<Product> products) {
         this.id = id;
-        this.name = name;
         this.products = products;
     }
 
@@ -58,13 +54,7 @@ public class Fridge {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
 //    public User getUser() {
 //        return user;
@@ -87,7 +77,7 @@ public class Fridge {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Fridge fridge = (Fridge) o;
-        return Objects.equals(id, fridge.id) && Objects.equals(name, fridge.name) && Objects.equals(products, fridge.products);
+        return Objects.equals(id, fridge.id)  && Objects.equals(products, fridge.products);
     }
 
     @Override
