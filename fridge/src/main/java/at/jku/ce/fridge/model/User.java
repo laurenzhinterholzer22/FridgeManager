@@ -2,6 +2,8 @@ package at.jku.ce.fridge.model;
 
 
 import com.fasterxml.jackson.annotation.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -148,20 +150,6 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password, birthday, gender, fridge, shoppingList);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", birthday=" + birthday +
-                ", gender='" + gender + '\'' +
-                ", fridge=" + fridge +
-                ", shoppingList=" + shoppingList +
-                '}';
+        return 13;
     }
 }

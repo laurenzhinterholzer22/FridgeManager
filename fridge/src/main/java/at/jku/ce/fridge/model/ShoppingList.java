@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -25,7 +26,7 @@ public class ShoppingList {
 ////    @JsonIgnore
 //    private User user;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "shoppingList", cascade = CascadeType.ALL)
+    @OneToMany(orphanRemoval = true, mappedBy = "shoppingList", cascade = CascadeType.ALL)
 //    @JsonManagedReference
 //    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "shopping_list"})
     @JsonIgnore
@@ -78,5 +79,18 @@ public class ShoppingList {
 
     public void setProducts(Set<Product> products) {
         this.products = products;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ShoppingList that = (ShoppingList) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(products, that.products);
+    }
+
+    @Override
+    public int hashCode() {
+        return 13;
     }
 }

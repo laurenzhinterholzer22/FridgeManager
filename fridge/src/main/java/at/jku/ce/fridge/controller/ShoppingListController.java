@@ -52,17 +52,13 @@ public class ShoppingListController {
         return returningP;
     }
 
-    @DeleteMapping("/shoppingList/{id}")
-    void deleteShoppingList(@PathVariable Long id) {
-        if(shoppingListService.findById(id).isPresent()) {
-            shoppingListService.deleteById(id);
-        }
-    }
 
-    @PostMapping(value = "/shoppingList" , consumes = {"application/json"})
-    ShoppingList newShoppingList(@RequestBody ShoppingList shoppingList) {
-        return shoppingListService.save(shoppingList);
-    }
+    //TODO: we dont need to add a new ShoppingList because when you create a new user a new shoppingList will be generated
+
+//    @PostMapping(value = "/shoppingList" , consumes = {"application/json"})
+//    ShoppingList newShoppingList(@RequestBody ShoppingList shoppingList) {
+//        return shoppingListService.save(shoppingList);
+//    }
 
 
 }

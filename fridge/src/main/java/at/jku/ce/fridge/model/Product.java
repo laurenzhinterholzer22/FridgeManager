@@ -4,6 +4,8 @@ package at.jku.ce.fridge.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -38,14 +40,19 @@ public class Product {
     private double amount;
 
 
-    @ManyToOne (cascade = CascadeType.ALL)
+//    @ManyToOne (cascade = CascadeType.ALL)
+//    @JoinColumn(name = "fridge_id", referencedColumnName = "fridge_id", columnDefinition = "integer")
+//    @JsonBackReference
+//    @JsonIgnore
+//    private Fridge fridge;
+
+    @ManyToOne
     @JoinColumn(name = "fridge_id", referencedColumnName = "fridge_id", columnDefinition = "integer")
-//    @JsonIgnoreProperties(value = {"handler", "hibernateLazyInitializer", "product"})
     @JsonBackReference
     @JsonIgnore
     private Fridge fridge;
 
-    @ManyToOne (cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "shopping_list_id", referencedColumnName = "shopping_list_id", columnDefinition = "integer")
 //    @JsonIgnoreProperties(value = {"hanlder", "hibernateLazyInitializer", "product"})
     @JsonBackReference
@@ -137,5 +144,18 @@ public class Product {
 
     public void setShoppingList(ShoppingList shoppingList) {
         this.shoppingList = shoppingList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Double.compare(product.amount, amount) == 0 && Objects.equals(id, product.id) && Objects.equals(ean, product.ean) && Objects.equals(name, product.name) && Objects.equals(category, product.category) && Objects.equals(expirydate, product.expirydate) && Objects.equals(amount_description, product.amount_description) && Objects.equals(fridge, product.fridge) && Objects.equals(shoppingList, product.shoppingList);
+    }
+
+    @Override
+    public int hashCode() {
+        return 13;
     }
 }

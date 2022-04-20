@@ -4,8 +4,11 @@ package at.jku.ce.fridge.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -20,15 +23,13 @@ public class Fridge {
     @Column(name="name")
     private String name;
 
-//    @OneToOne(fetch = FetchType.EAGER, mappedBy = "fridge", cascade = CascadeType.ALL)
-////    @JsonManagedReference
-////    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "fridge"})
-////    @JsonIgnore
-//    private User user;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "fridge", cascade = CascadeType.ALL)
-//    @JsonManagedReference
-//    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "fridge"})
+
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "fridge", cascade = CascadeType.ALL)
+//    @JsonIgnore
+//    private Set<Product> products;
+
+    @OneToMany(orphanRemoval = true, mappedBy = "fridge", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Product> products;
 
@@ -79,5 +80,18 @@ public class Fridge {
 
     public void setProducts(Set<Product> products) {
         this.products = products;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Fridge fridge = (Fridge) o;
+        return Objects.equals(id, fridge.id) && Objects.equals(name, fridge.name) && Objects.equals(products, fridge.products);
+    }
+
+    @Override
+    public int hashCode() {
+        return 13;
     }
 }
