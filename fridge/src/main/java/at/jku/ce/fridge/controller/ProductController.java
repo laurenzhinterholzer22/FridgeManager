@@ -30,15 +30,15 @@ public class ProductController {
     @GetMapping("/product")
     public List<Product> getAllProducts() {return  productService.findAll();}
 
-    @GetMapping("/product/{ean}")
-    public Optional<Product> getProduct(@PathVariable String ean){
-        return productService.findById(ean);
+    @GetMapping("/product/{id}")
+    public Optional<Product> getProduct(@PathVariable Long id){
+        return productService.findById(id);
     }
 
-    @DeleteMapping("/product/{ean}")
-    void deleteProduct(@PathVariable String ean) {
-        if(productService.findById(ean).isPresent()){
-            productService.deleteById(ean);
+    @DeleteMapping("/product/{id}")
+    void deleteProduct(@PathVariable Long id) {
+        if(productService.findById(id).isPresent()){
+            productService.deleteById(id);
         }
     }
 
