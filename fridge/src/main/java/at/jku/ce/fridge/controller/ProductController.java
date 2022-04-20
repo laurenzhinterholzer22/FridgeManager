@@ -52,14 +52,14 @@ public class ProductController {
     @PostMapping(value = "/product/fridge/{fridge_id}" , consumes = {"application/json"})
     Product newProductFridge(@PathVariable Long fridge_id, @RequestBody Product product){
         product.setFridge(fridgeService.getById(fridge_id));
-        product.setShoppingList(null);
+//        product.setShoppingList(null);
         return productService.save(product);
     }
 
     @PostMapping(value = "/product/shoppingList/{shopping_list_id}" , consumes = {"application/json"})
     Product newProductShoppingList(@PathVariable Long shopping_list_id, @RequestBody Product product){
         product.setShoppingList(shoppingListService.getById(shopping_list_id));
-        product.setFridge(null);
+//        product.setFridge(null);
         return productService.save(product);
     }
 }

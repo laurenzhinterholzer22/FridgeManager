@@ -39,15 +39,15 @@ public class Product {
 
 
     @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name = "fridge_id", referencedColumnName = "fridge_id")
-//    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "product"})
+    @JoinColumn(name = "fridge_id", referencedColumnName = "fridge_id", columnDefinition = "integer")
+//    @JsonIgnoreProperties(value = {"handler", "hibernateLazyInitializer", "product"})
     @JsonBackReference
     @JsonIgnore
     private Fridge fridge;
 
     @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name = "shopping_list_id", referencedColumnName = "shopping_list_id")
-//    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "product"})
+    @JoinColumn(name = "shopping_list_id", referencedColumnName = "shopping_list_id", columnDefinition = "integer")
+//    @JsonIgnoreProperties(value = {"hanlder", "hibernateLazyInitializer", "product"})
     @JsonBackReference
     @JsonIgnore
     private ShoppingList shoppingList;
