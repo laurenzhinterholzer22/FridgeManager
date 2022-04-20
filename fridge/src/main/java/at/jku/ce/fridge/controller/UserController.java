@@ -37,7 +37,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/user")
+    @PostMapping(value = "/user", consumes = {"application/json"})
     User newUser(@RequestBody User user) {
         user.setFridge(new Fridge());
         user.setShoppingList(new ShoppingList());

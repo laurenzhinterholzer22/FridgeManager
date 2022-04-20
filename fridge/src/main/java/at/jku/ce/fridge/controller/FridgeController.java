@@ -37,7 +37,7 @@ public class FridgeController {
         }
     }
 
-    @PostMapping("/fridge")
+    @PostMapping(value = "/fridge", consumes = {"application/json"})
     Fridge newFridge(@RequestBody Fridge fridge) {
         return fridgeService.save(fridge);
     }

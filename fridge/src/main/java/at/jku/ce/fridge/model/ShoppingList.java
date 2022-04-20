@@ -19,15 +19,15 @@ public class ShoppingList {
     @Column(name = "name")
     private String name;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "shoppingList", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "shoppping_list"})
-    @JsonIgnore
-    private User user;
+//    @OneToOne(fetch = FetchType.EAGER, mappedBy = "shoppingList", cascade = CascadeType.ALL)
+////    @JsonManagedReference
+////    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "shoppping_list"})
+////    @JsonIgnore
+//    private User user;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "shoppingList", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "shopping_list"})
+//    @JsonManagedReference
+//    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "shopping_list"})
     @JsonIgnore
     private Set<Product> products;
 
@@ -35,10 +35,16 @@ public class ShoppingList {
 
     }
 
-    public ShoppingList(Long id, String name, User user, Set<Product> products) {
+//    public ShoppingList(Long id, String name, User user, Set<Product> products) {
+//        this.id = id;
+//        this.name = name;
+//        this.user = user;
+//        this.products = products;
+//    }
+
+    public ShoppingList(Long id, String name, Set<Product> products) {
         this.id = id;
         this.name = name;
-        this.user = user;
         this.products = products;
     }
 
@@ -58,13 +64,13 @@ public class ShoppingList {
         this.name = name;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     public Set<Product> getProducts() {
         return products;

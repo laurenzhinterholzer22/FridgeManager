@@ -38,7 +38,7 @@ public class ShoppingListController {
         }
     }
 
-    @PostMapping("/shoppingList")
+    @PostMapping(value = "/shoppingList" , consumes = {"application/json"})
     ShoppingList newShoppingList(@RequestBody ShoppingList shoppingList) {
         return shoppingListService.save(shoppingList);
     }
