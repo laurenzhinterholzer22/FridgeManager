@@ -40,3 +40,8 @@ This is a Repro for a Application called FridgeManager
 + Delete /product/{id}: delets one Product (also from the Fridge or Shopping List)
 + Post /product/fridge/{fridge_id}: inserts a new Product in the Fridge with the id
 + Post /product/shoppingList/{shopping_list_id}: inserts a new Product in the Shopping List with the id
+
+### OpenFoodFacts
+
++ Get /openfoodfacts/product/{ean}: returns a product with the ean
++ Get /openfoodfacts/{search}: returns a list of products wiht according to the search criteria
