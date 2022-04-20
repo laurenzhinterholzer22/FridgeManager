@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
+
 
 @RestController
 public class ShoppingListController {
@@ -48,13 +48,6 @@ public class ShoppingListController {
         return returningP;
     }
 
-
-    //TODO: we dont need to add a new ShoppingList because when you create a new user a new shoppingList will be generated
-
-//    @PostMapping(value = "/shoppingList" , consumes = {"application/json"})
-//    ShoppingList newShoppingList(@RequestBody ShoppingList shoppingList) {
-//        return shoppingListService.save(shoppingList);
-//    }
 
 
 }

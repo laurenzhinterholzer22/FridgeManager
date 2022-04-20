@@ -46,13 +46,6 @@ public class FridgeController {
         return returningP;
     }
 
-    //TODO: we dont need to add a new Fridge because when you create a new user a new Fridge will be generated
-
-//    @PostMapping(value = "/fridge", consumes = {"application/json"})
-//    Fridge newFridge(@RequestBody Fridge fridge) {
-//        return fridgeService.save(fridge);
-//    }
-
 
 
 }

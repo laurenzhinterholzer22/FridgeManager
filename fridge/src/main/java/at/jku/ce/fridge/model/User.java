@@ -40,14 +40,12 @@ public class User {
 
     @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "fridge_id", referencedColumnName = "fridge_id")
-//    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "user"})
     @JsonBackReference
     @JsonIgnore
     private Fridge fridge;
 
     @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "shopping_list_id", referencedColumnName = "shopping_list_id")
-//    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "user"})
     @JsonBackReference
     @JsonIgnore
     private ShoppingList shoppingList;

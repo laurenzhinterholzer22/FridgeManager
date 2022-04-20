@@ -22,10 +22,6 @@ public class Fridge {
 
 
 
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "fridge", cascade = CascadeType.ALL)
-//    @JsonIgnore
-//    private Set<Product> products;
-
     @OneToMany(orphanRemoval = true, mappedBy = "fridge", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Product> products;
@@ -34,12 +30,6 @@ public class Fridge {
 
     }
 
-//    public Fridge(Long id, String name, User user, Set<Product> products) {
-//        this.id = id;
-//        this.name = name;
-//        this.user = user;
-//        this.products = products;
-//    }
 
     public Fridge(Long id, Set<Product> products) {
         this.id = id;
@@ -55,14 +45,6 @@ public class Fridge {
     }
 
 
-
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
 
     public Set<Product> getProducts() {
         return products;

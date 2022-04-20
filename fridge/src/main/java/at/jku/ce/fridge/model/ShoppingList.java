@@ -18,15 +18,7 @@ public class ShoppingList {
     private Long id;
 
 
-//    @OneToOne(fetch = FetchType.EAGER, mappedBy = "shoppingList", cascade = CascadeType.ALL)
-////    @JsonManagedReference
-////    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "shoppping_list"})
-////    @JsonIgnore
-//    private User user;
-
     @OneToMany(orphanRemoval = true, mappedBy = "shoppingList", cascade = CascadeType.ALL)
-//    @JsonManagedReference
-//    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer", "shopping_list"})
     @JsonIgnore
     private Set<Product> products;
 
@@ -34,12 +26,6 @@ public class ShoppingList {
 
     }
 
-//    public ShoppingList(Long id, String name, User user, Set<Product> products) {
-//        this.id = id;
-//        this.name = name;
-//        this.user = user;
-//        this.products = products;
-//    }
 
     public ShoppingList(Long id, Set<Product> products) {
         this.id = id;
@@ -55,14 +41,6 @@ public class ShoppingList {
     }
 
 
-
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
 
     public Set<Product> getProducts() {
         return products;

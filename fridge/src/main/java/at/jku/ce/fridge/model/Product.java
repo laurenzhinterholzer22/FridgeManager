@@ -40,12 +40,6 @@ public class Product {
     private double amount;
 
 
-//    @ManyToOne (cascade = CascadeType.ALL)
-//    @JoinColumn(name = "fridge_id", referencedColumnName = "fridge_id", columnDefinition = "integer")
-//    @JsonBackReference
-//    @JsonIgnore
-//    private Fridge fridge;
-
     @ManyToOne
     @JoinColumn(name = "fridge_id", referencedColumnName = "fridge_id", columnDefinition = "integer")
     @JsonBackReference
@@ -54,7 +48,6 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "shopping_list_id", referencedColumnName = "shopping_list_id", columnDefinition = "integer")
-//    @JsonIgnoreProperties(value = {"hanlder", "hibernateLazyInitializer", "product"})
     @JsonBackReference
     @JsonIgnore
     private ShoppingList shoppingList;
