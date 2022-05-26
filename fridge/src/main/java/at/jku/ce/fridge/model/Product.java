@@ -30,7 +30,7 @@ public class Product {
     @Column(name = "category")
     private String category;
 
-    @Column(name = "expirydate")
+    @Column(name = "expirydate", nullable = false)
     private Timestamp expirydate;
 
     @Column(name = "amount_description")

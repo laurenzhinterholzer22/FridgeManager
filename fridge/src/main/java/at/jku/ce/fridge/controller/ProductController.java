@@ -45,7 +45,6 @@ public class ProductController {
     }
 
 
-
     @PostMapping(value = "/product/fridge/{fridge_id}" , consumes = {"application/json"})
     Product newProductFridge(@PathVariable Long fridge_id, @RequestBody Product product){
         try {
