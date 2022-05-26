@@ -90,17 +90,16 @@ public class UserController {
 
     @PostMapping(value = "/user/login", consumes = {"application/json"})
     Optional<User> loginUser(@RequestBody User user) {
-        if (userService.findById(user.getId()).isPresent()){
-            Optional<User> user1 = userService.findById(user.getId());
-            if (BCrypt.checkpw(user.getPassword(),user1.get().getPassword()) && user1.get().getEmail().equals(user.getEmail())) {
-                return user1;
+        try {
+            if (userService.findById(user.getId()).isPresent()) {
+                Optional<User> user1 = userService.findById(user.getId());
+                if (BCrypt.checkpw(user.getPassword(), user1.get().getPassword()) && user1.get().getEmail().equals(user.getEmail())) {
+                    return user1;
+                }
             }
-            else {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-            }
-        } else {
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
     }
-
 }
